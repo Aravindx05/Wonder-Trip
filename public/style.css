@@ -1,9 +1,12 @@
+
+
 body {
     font-family: "Plus Jakarta Sans",sans-serif !important;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
+
 .container{
     flex: 1;
 }
@@ -93,4 +96,38 @@ body {
 .show-card{
     padding-left: 0;
     padding-right: 0;
+}
+
+
+
+:root { --auth-max-width: 420px; }
+
+/* only applies to login/signup pages */
+body.auth-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main.auth-content {
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: var(--auth-max-width);
+  background: #fff;
+  padding: 1.6rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* footer for auth pages */
+body.auth-page footer {
+  position: static !important;
+  width: 100%;
 }
