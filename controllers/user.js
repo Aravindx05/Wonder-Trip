@@ -15,7 +15,7 @@ module.exports.signup=async(req,res)=>{
         if(err){
             return next(err);
         }
-         req.flash("success","Welcome to WanderTrip");
+         req.flash("success","Welcome to WonderTrip");
          res.redirect("/listing");
     });
     }catch(e){ 
@@ -31,7 +31,7 @@ module.exports.renderLogin=(req,res)=>{
 
 
 module.exports.login=async(req,res)=>{
-    req.flash("success","Welcome back to WanderTrip");
+    req.flash("success","Welcome back to WonderTrip");
     let redirectUrl=res.locals.redirectUrl || "/listing";
     res.redirect(redirectUrl);
 };
