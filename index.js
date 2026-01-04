@@ -14,7 +14,7 @@ const listingRouter=require("./routes/listing.js");
 const reviewsRouter=require("./routes/review.js");
 const userRouter=require("./routes/user.js");
 const session=require("express-session");
-const MongoStore=require("connect-mongo");
+const MongoStore=require("connect-mongo").default;
 const flash=require("connect-flash");
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
@@ -29,44 +29,52 @@ app.use(express.static(path.join(__dirname,"public")));
 
 
 // Connecting to DataBase
-
-const dburl=process.env.ATLASDB_URL;
+const dburl = process.env.ATLASDB_URL;
 
 main()
-.then((res)=>{
+  .then(() => {
     console.log("database is connected");
-}) 
-.catch(err => console.log(err));
+  })
+  .catch(err => console.log(err));
 
 async function main() {
   await mongoose.connect(dburl);
 }
 
+/* ================= FIX STARTS HERE ================= */
 
+// ❌ OLD (removed)
+// const Store = MongoStore.create({ ... });
 
-const Store=MongoStore.create({
-  mongoUrl:dburl,
-  crypto:{
-    secret:process.env.SECRET,
+// ✅ NEW (correct for connect-mongo v6+)
+const store = new MongoStore({
+  mongoUrl: dburl,
+  crypto: {
+    secret: process.env.SECRET,
   },
-  touchAfter:24*3600,
+  touchAfter: 24 * 3600,
 });
 
-Store.on("error",()=>{
+store.on("error", () => {
   console.log("error in mongo session store");
 });
 
-const sessionOPtions={
-  Store,
-  secret:process.env.SECRET,
-  resave:false,
-  saveUninitialized:true,
-  cookie:{
-    expires:Date.now()+7*24*60*60*1000,
-    maxAge:7*24*60*60*1000,
-    httpOnly:true
+// ❌ OLD: Store (capital S)
+// ✅ NEW: store (lowercase)
+const sessionOPtions = {
+  store: store,
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true
   },
 };
+
+/* ================= FIX ENDS HERE ================= */
+
 
 // sessions
 app.use(session(sessionOPtions));

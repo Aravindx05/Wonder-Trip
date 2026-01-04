@@ -1,7 +1,7 @@
 {
   "engines": {
     "node": "v22.14.0"
-  }, 
+  },
   "name": "airbnb",
   "version": "1.0.0",
   "main": "index.js",
@@ -15,7 +15,7 @@
   "dependencies": {
     "cloudinary": "^1.41.3",
     "connect-flash": "^0.1.1",
-    "connect-mongo": "^5.1.0",
+    "connect-mongo": "^6.0.0",
     "dotenv": "^17.2.1",
     "ejs": "^3.1.10",
     "ejs-mate": "^4.0.0",
@@ -23,7 +23,8 @@
     "express-session": "^1.18.2",
     "joi": "^17.13.3",
     "method-override": "^3.0.0",
-    "mongoose": "^8.15.1",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.1",
     "multer": "^2.0.2",
     "multer-storage-cloudinary": "^4.0.0",
     "passport": "^0.7.0",
